@@ -7,6 +7,13 @@ public class Drink {
     private String flavor;
     private double price;
 
+    // ANSI escape codes for colors and styles
+    private static final String RESET = "\u001B[0m";
+    private static final String CYAN = "\u001B[36m";
+    private static final String YELLOW = "\u001B[33m";
+    private static final String GREEN = "\u001B[32m";
+    private static final String BOLD = "\u001B[1m";
+
     public Drink(Scanner scanner) {
         setSize(scanner);
         setFlavor(scanner);
@@ -14,12 +21,12 @@ public class Drink {
     }
 
     private void setSize(Scanner scanner) {
-        System.out.print("Choose drink size (small, medium, large): ");
+        System.out.print(CYAN + BOLD + "Choose drink size (small, medium, large): " + RESET);
         this.size = scanner.nextLine().toLowerCase();
     }
 
     private void setFlavor(Scanner scanner) {
-        System.out.print("Choose drink flavor (e.g., cola, lemonade, orange): ");
+        System.out.print(CYAN + BOLD + "Choose drink flavor (e.g., cola, lemonade, orange): " + RESET);
         this.flavor = scanner.nextLine();
     }
 
@@ -45,6 +52,10 @@ public class Drink {
 
     @Override
     public String toString() {
-        return "Drink [Size: " + size + ", Flavor: " + flavor + ", Price: $" + String.format("%.2f", price) + "]";
+        return GREEN + "Drink [" + RESET + 
+               YELLOW + "Size: " + RESET + size + 
+               CYAN + ", Flavor: " + RESET + flavor + 
+               GREEN + ", Price: $" + RESET + String.format("%.2f", price) + 
+               GREEN + "]";
     }
 }

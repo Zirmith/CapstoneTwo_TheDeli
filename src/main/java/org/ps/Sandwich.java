@@ -14,13 +14,21 @@ public class Sandwich {
     private boolean toasted;
     private double price;
 
+    // ANSI escape codes for colors and styles
+    private static final String RESET = "\u001B[0m";
+    private static final String CYAN = "\u001B[36m";
+    private static final String YELLOW = "\u001B[33m";
+    private static final String GREEN = "\u001B[32m";
+    private static final String BOLD = "\u001B[1m";
+    private static final String RED = "\u001B[31m";
+    
     public Sandwich(Scanner scanner) {
         meats = new ArrayList<>();
         cheeses = new ArrayList<>();
         regularToppings = new ArrayList<>();
         sauces = new ArrayList<>();
 
-        System.out.println("\nCustomize Sandwich:");
+        System.out.println("\n" + CYAN + BOLD + "Customize Sandwich:" + RESET);
 
         setSize(scanner);
         setBread(scanner);
@@ -34,17 +42,17 @@ public class Sandwich {
     }
 
     private void setSize(Scanner scanner) {
-        System.out.print("Choose size (4\", 8\", 12\"): ");
+        System.out.print(CYAN + BOLD + "Choose size (4\", 8\", 12\"): " + RESET);
         this.size = scanner.nextLine().trim();
     }
 
     private void setBread(Scanner scanner) {
-        System.out.print("Choose bread (white, wheat, rye, wrap): ");
+        System.out.print(CYAN + BOLD + "Choose bread (white, wheat, rye, wrap): " + RESET);
         this.bread = scanner.nextLine().trim();
     }
 
     private void setToasted(Scanner scanner) {
-        System.out.print("Would you like the sandwich toasted? (yes/no): ");
+        System.out.print(CYAN + BOLD + "Would you like the sandwich toasted? (yes/no): " + RESET);
         String toastOption = scanner.nextLine().trim();
         this.toasted = toastOption.equalsIgnoreCase("yes");
     }
@@ -52,17 +60,17 @@ public class Sandwich {
     private void addMeats(Scanner scanner) {
         String meatOption;
         do {
-            System.out.print("Add meat (steak, ham, salami, roast beef, chicken, bacon or 'done' to finish): ");
+            System.out.print(CYAN + BOLD + "Add meat (steak, ham, salami, roast beef, chicken, bacon or 'done' to finish): " + RESET);
             meatOption = scanner.nextLine().trim().toLowerCase();
 
             if (meatOption.equals("done")) {
                 break;
             } else if (meatOption.isEmpty()) {
-                System.out.println("Invalid input. Please enter a valid meat option.");
+                System.out.println(RED + "Invalid input. Please enter a valid meat option." + RESET);
             } else if (isValidMeat(meatOption)) {
                 meats.add(meatOption);
             } else {
-                System.out.println("Invalid choice. Please choose a valid meat option or type 'done' to finish.");
+                System.out.println(RED + "Invalid choice. Please choose a valid meat option or type 'done' to finish." + RESET);
             }
         } while (true);
     }
@@ -75,17 +83,17 @@ public class Sandwich {
     private void addCheeses(Scanner scanner) {
         String cheeseOption;
         do {
-            System.out.print("Add cheese (american, provolone, cheddar, swiss or 'done' to finish): ");
+            System.out.print(CYAN + BOLD + "Add cheese (american, provolone, cheddar, swiss or 'done' to finish): " + RESET);
             cheeseOption = scanner.nextLine().trim().toLowerCase();
 
             if (cheeseOption.equals("done")) {
                 break;
             } else if (cheeseOption.isEmpty()) {
-                System.out.println("Invalid input. Please enter a valid cheese option.");
+                System.out.println(RED + "Invalid input. Please enter a valid cheese option." + RESET);
             } else if (isValidCheese(cheeseOption)) {
                 cheeses.add(cheeseOption);
             } else {
-                System.out.println("Invalid choice. Please choose a valid cheese option or type 'done' to finish.");
+                System.out.println(RED + "Invalid choice. Please choose a valid cheese option or type 'done' to finish." + RESET);
             }
         } while (true);
     }
@@ -98,17 +106,17 @@ public class Sandwich {
     private void addRegularToppings(Scanner scanner) {
         String toppingOption;
         do {
-            System.out.print("Add regular topping (lettuce, peppers, onions, tomatoes, jalapenos, cucumbers, pickles, guacamole, mushrooms or 'done' to finish): ");
+            System.out.print(CYAN + BOLD + "Add regular topping (lettuce, peppers, onions, tomatoes, jalapenos, cucumbers, pickles, guacamole, mushrooms or 'done' to finish): " + RESET);
             toppingOption = scanner.nextLine().trim().toLowerCase();
 
             if (toppingOption.equals("done")) {
                 break;
             } else if (toppingOption.isEmpty()) {
-                System.out.println("Invalid input. Please enter a valid topping option.");
+                System.out.println(RED + "Invalid input. Please enter a valid topping option." + RESET);
             } else if (isValidTopping(toppingOption)) {
                 regularToppings.add(toppingOption);
             } else {
-                System.out.println("Invalid choice. Please choose a valid topping option or type 'done' to finish.");
+                System.out.println(RED + "Invalid choice. Please choose a valid topping option or type 'done' to finish." + RESET);
             }
         } while (true);
     }
@@ -122,17 +130,17 @@ public class Sandwich {
     private void addSauces(Scanner scanner) {
         String sauceOption;
         do {
-            System.out.print("Add sauce (mayo, mustard, ketchup, ranch, thousand islands, vinaigrette or 'done' to finish): ");
+            System.out.print(CYAN + BOLD + "Add sauce (mayo, mustard, ketchup, ranch, thousand islands, vinaigrette or 'done' to finish): " + RESET);
             sauceOption = scanner.nextLine().trim().toLowerCase();
 
             if (sauceOption.equals("done")) {
                 break;
             } else if (sauceOption.isEmpty()) {
-                System.out.println("Invalid input. Please enter a valid sauce option.");
+                System.out.println(RED + "Invalid input. Please enter a valid sauce option." + RESET);
             } else if (isValidSauce(sauceOption)) {
                 sauces.add(sauceOption);
             } else {
-                System.out.println("Invalid choice. Please choose a valid sauce option or type 'done' to finish.");
+                System.out.println(RED + "Invalid choice. Please choose a valid sauce option or type 'done' to finish." + RESET);
             }
         } while (true);
     }
@@ -184,9 +192,16 @@ public class Sandwich {
 
     @Override
     public String toString() {
-        return "Sandwich [Size: " + size + "\", Bread: " + bread + ", Toasted: " + (toasted ? "Yes" : "No") +
-                ", Meats: " + meats + ", Cheeses: " + cheeses + ", Regular Toppings: " + regularToppings +
-                ", Sauces: " + sauces + ", Price: $" + String.format("%.2f", price) + "]";
+        return GREEN + "Sandwich [" + RESET + 
+               YELLOW + "Size: " + RESET + size + "\"" + 
+               CYAN + ", Bread: " + RESET + bread + 
+               GREEN + ", Toasted: " + RESET + (toasted ? "Yes" : "No") + 
+               CYAN + ", Meats: " + RESET + meats + 
+               GREEN + ", Cheeses: " + RESET + cheeses + 
+               CYAN + ", Regular Toppings: " + RESET + regularToppings + 
+               GREEN + ", Sauces: " + RESET + sauces + 
+               GREEN + ", Price: $" + RESET + String.format("%.2f", price) + 
+               GREEN + "]";
     }
 
     public double getPrice() {
